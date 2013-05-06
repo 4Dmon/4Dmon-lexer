@@ -8,12 +8,7 @@ you're looking for something that works.
 Lexer for 4D code. Modeled on the [coffee script lexer](http://jashkenas.github.io/coffee-script/documentation/docs/lexer.html).
 
 ## Getting Started
-_(eventually)_ Install the module with: `npm install 4dmon-lexer`
-
-```javascript
-var _4dmon_lexer = require('4dmon-lexer');
-_4dmon_lexer.awesome(); // "awesome"
-```
+_(Coming soon)_
 
 ## Documentation
 _(Coming soon)_
