@@ -40,7 +40,10 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   require('matchdep').filterDev('grunt-*').map(grunt.loadNpmTasks);
 
-  grunt.registerTask('test', ['jshint', 'simplemocha']);
+  grunt.registerTask('test', [
+    'jshint',
+    'simplemocha'
+  ]);
 
   // Default task.
   grunt.registerTask('default', ['test']);
