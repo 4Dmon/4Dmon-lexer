@@ -1,0 +1,5 @@
+// This method has lots of trailing whitespace 
+    
+C_BOOLEAN($0)     
+
+$0 := True 
