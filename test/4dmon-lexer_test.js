@@ -27,6 +27,10 @@ describe('4dmon-lexer', function() {
     // [todo /]
   });
 
+  // NOTE: the tokenizer will just spin indefinitely if your code has any line
+  // breaks until `lexer.lineToken` is filled out. You can test the other token
+  // identifiers but you'll probably want to pass it only a single line of code.
+
   describe('identifier matching', function() {
 
     it('should recognize interprocess variables', function() {
