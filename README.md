@@ -5,7 +5,8 @@ you're looking for something that works.
 
 # 4dmon-lexer [![Build Status](https://secure.travis-ci.org/jrussell-ivantage/4dmon-lexer.png?branch=master)](http://travis-ci.org/jrussell-ivantage/4dmon-lexer)
 
-Lexer for 4D code. Modeled on the [coffee script lexer](http://jashkenas.github.io/coffee-script/documentation/docs/lexer.html).
+A 4D code lexer, written for node and the browser. Modeled on the [coffee script
+lexer](http://jashkenas.github.io/coffee-script/documentation/docs/lexer.html).
 
 ## Getting Started
 _(Coming soon)_
