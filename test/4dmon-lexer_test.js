@@ -1,4 +1,5 @@
 /*global describe, it */
+/*jshint unused:false */
 
 'use strict';
 
@@ -13,7 +14,7 @@ var fs = require('fs')
 
 describe('4dmon-lexer', function() {
 
-  it.only('should be able to cleanup input code', function() {
+  it('should be able to cleanup input code', function() {
     var cleaned = lexer.clean(fx_trailing_whitespace);
     expect(cleaned)
         .to.equal([
@@ -22,7 +23,7 @@ describe('4dmon-lexer', function() {
           '$0 := True'
         ].join('\n\n'));
   });
-  
+
   it('should recognize identifier tokens', function() {
     // [todo /]
   });
@@ -62,21 +63,43 @@ describe('4dmon-lexer', function() {
   });
 
   it('should recognize comment tokens', function() {
-    var tokens = lexer.tokenize(fx_comments);
+    var cmmnt = '// hey this is a comment'
+      , tokens = lexer.tokenize(cmmnt);
     expect(tokens.length).to.equal(1);
     expect(tokens[0][0]).to.equal('COMMENT');
+    expect(tokens[0][1]).to.equal(cmmnt);
+  });
+
+  it('should recognize new line tokens', function() {
+    var nls = '\n\n\n'
+      , tokens = lexer.tokenize(nls);
+    expect(tokens.length).to.equal(3); // Should find all three
+    expect(tokens[0][0]).to.equal('NEW_LINE');
+    expect(tokens[0][1]).to.equal('\n'); // Each should only be a sinle \n
   });
 
   it('should recognize white space tokens', function() {
-    // [todo /]
+    var ws = ' \t'
+      , tokens = lexer.tokenize(ws);
+    expect(tokens.length).to.equal(1);
+    expect(tokens[0][0]).to.equal('WHITESPACE');
+    expect(tokens[0][1]).to.equal(ws);
   });
 
   it('should recognize number tokens', function() {
-    // [todo /]
+    var nmbr = '462'
+      , tokens = lexer.tokenize(nmbr);
+    expect(tokens.length).to.equal(1);
+    expect(tokens[0][0]).to.equal('NUMBER');
+    expect(tokens[0][1]).to.equal(nmbr);
   });
 
   it('should recognize string tokens', function() {
-    // [todo /]
+    var str = '"Hey this is a siple string"'
+      , tokens = lexer.tokenize(str);
+    expect(tokens.length).to.equal(1);
+    expect(tokens[0][0]).to.equal('STRING');
+    expect(tokens[0][1]).to.equal(str);
   });
 
 });
