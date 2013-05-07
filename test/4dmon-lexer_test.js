@@ -95,7 +95,7 @@ describe('4dmon-lexer', function() {
   });
 
   it('should recognize string tokens', function() {
-    var str = '"Hey this is a siple string"'
+    var str = '"Hey this is a simple string"'
       , tokens = lexer.tokenize(str);
     expect(tokens.length).to.equal(1);
     expect(tokens[0][0]).to.equal('STRING');
