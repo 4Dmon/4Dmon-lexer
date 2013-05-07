@@ -1,0 +1,23 @@
+
+  // ----------------------------------------------------
+  // User name (OS): Justin (win)
+  // Date and time: 05/7/13, 14:41:12
+  // ----------------------------------------------------
+  // Method: silly_method
+  // Description
+  //
+  // This method doesn't do anything useful!
+  //
+  // Parameters
+  // @param boolean truthy
+  // ----------------------------------------------------
+
+C_BOOLEAN($0;$1;$truthy)
+C_BOOLEAN($falsy)
+
+$falsy:=True
+$truthy=Not($falsy) & $falsy
+
+$0:=$falsy | $truthy | True | False
+
+

@@ -35,11 +35,27 @@ describe('4dmon-lexer', function() {
   describe('identifier matching', function() {
 
     it('should recognize interprocess variables', function() {
-      // [todo /]
+      var glbl = '<>my global'
+        , tokens = lexer.tokenize(glbl);
+      expect(tokens.length).to.equal(1);
+      expect(tokens[0][0]).to.equal('GLOBAL_IDENTIFIER');
+      expect(tokens[0][1]).to.equal(glbl);
     });
 
     it('should recognize local variables', function() {
-      // [todo /]
+      var lcl = '$_my local_1'
+        , tokens = lexer.tokenize(lcl);
+      expect(tokens.length).to.equal(1);
+      expect(tokens[0][0]).to.equal('LOCAL_IDENTIFIER');
+      expect(tokens[0][1]).to.equal(lcl);
+    });
+
+    it('should recognize process variables', function() {
+      var prcss = '_4process var'
+        , tokens = lexer.tokenize(prcss);
+      expect(tokens.length).to.equal(1);
+      expect(tokens[0][0]).to.equal('IDENTIFIER');
+      expect(tokens[0][1]).to.equal(prcss);
     });
 
     it('should recognize built in 4D methods', function() {
