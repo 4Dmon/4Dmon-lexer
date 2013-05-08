@@ -2,9 +2,10 @@
 
 angular.module('4dmonLexerApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.features = [
+      'Syntax highlighting for 4D code snippets',
+      'Overview of process and inter-process variable usage',
+      'Project method dependency graph',
+      'Automated benchmarking'
     ];
   });
