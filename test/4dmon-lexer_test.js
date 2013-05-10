@@ -1,4 +1,4 @@
-/*global describe, it */
+/*global describe, it, beforeEach */
 /*jshint unused:false */
 
 'use strict';
@@ -6,13 +6,17 @@
 var fs = require('fs')
   , expect = require('chai').expect
   , Lexer = require('../lib/4dmon-lexer.js').Lexer
-  , lexer = new Lexer()
   , fixtures = __dirname + '/fixtures'
   , fx_comments = fs.readFileSync(fixtures + '/comments.txt').toString()
   , fx_trailing_whitespace = fs
       .readFileSync(fixtures + '/trailing_whitespace.txt').toString();
 
 describe('4dmon-lexer', function() {
+  var lexer;
+
+  beforeEach(function() {
+    lexer = new Lexer();
+  });
 
   it('should be able to cleanup input code', function() {
     var cleaned = lexer.clean(fx_trailing_whitespace);
@@ -24,98 +28,93 @@ describe('4dmon-lexer', function() {
         ].join('\n\n'));
   });
 
-  it('should recognize identifier tokens', function() {
-    // [todo /]
-  });
+  describe('token matchers', function() {
+    // -----------------------------------------------------
+    // These tests do not perform tokenize actions... just make search each
+    // lexer.@Token() method recognizes what it should
+    // -----------------------------------------------------
 
-  // NOTE: the tokenizer will just spin indefinitely if your code has any line
-  // breaks until `lexer.lineToken` is filled out. You can test the other token
-  // identifiers but you'll probably want to pass it only a single line of code.
-
-  describe('identifier matching', function() {
-
-    it('should recognize interprocess variables', function() {
-      var glbl = '<>my global'
-        , tokens = lexer.tokenize(glbl);
-      expect(tokens.length).to.equal(1);
-      expect(tokens[0][0]).to.equal('GLOBAL_IDENTIFIER');
-      expect(tokens[0][1]).to.equal(glbl);
+    beforeEach(function() {
+      lexer.tokenize(); // Initializes lexer.tokens etc.
     });
 
-    it('should recognize local variables', function() {
-      var lcl = '$_my local_1'
-        , tokens = lexer.tokenize(lcl);
-      expect(tokens.length).to.equal(1);
-      expect(tokens[0][0]).to.equal('LOCAL_IDENTIFIER');
-      expect(tokens[0][1]).to.equal(lcl);
-    });
+    describe('identifier matching', function() {
 
-    it('should recognize process variables', function() {
-      var prcss = '_4process var'
-        , tokens = lexer.tokenize(prcss);
-      expect(tokens.length).to.equal(1);
-      expect(tokens[0][0]).to.equal('IDENTIFIER');
-      expect(tokens[0][1]).to.equal(prcss);
-    });
+      it('should recognize interprocess variables', function() {
+        lexer.chunk = '<>my global \n';
+        expect(lexer.identifierToken()).to.equal(11);
+        expect(lexer.tokens[0][0]).to.equal('IDENTIFIER_GLOBAL');
+      });
 
-    it('should recognize built in 4D methods', function() {
-      // [todo /]
-    });
+      it('should recognize local variables', function() {
+        lexer.chunk = '$_my local_1 \n';
+        expect(lexer.identifierToken()).to.equal(12);
+        expect(lexer.tokens[0][0]).to.equal('IDENTIFIER_LOCAL');
+      });
 
-    it('should recognize project methods', function() {
-      // [todo /]
-    });
+      it('should recognize process variables', function() {
+        lexer.chunk = '_4processss var \n';
+        expect(lexer.identifierToken()).to.equal(15);
+        expect(lexer.tokens[0][0]).to.equal('IDENTIFIER');
+      });
 
-    it('should should recognize plugin methods', function() {
-      // [todo /]
-    });
+      it('should recognize identifiers with parens as methods', function() {
+        lexer.chunk = 'awesome function ()';
+        expect(lexer.identifierToken()).to.equal(16);
+        expect(lexer.tokens[0][0]).to.equal('IDENTIFIER_INVOKED');
+      });
 
-    describe('with mixins', function() {
-      it('should recogize methods added at runtime', function() {
+      it('should recognize built in 4D methods', function() {
         // [todo /]
       });
+
+      it('should recognize project methods', function() {
+        // [todo /]
+      });
+
+      it('should should recognize plugin methods', function() {
+        // [todo /]
+      });
+
+      describe('with mixins', function() {
+        it('should recogize methods added at runtime', function() {
+          // [todo /]
+        });
+      });
+
     });
 
-  });
+    it('should recognize comment tokens', function() {
+      lexer.chunk = '// hey this is a comment\n now this is code';
+      expect(lexer.commentToken()).to.equal('// hey this is a comment'.length);
+      expect(lexer.tokens[0][0]).to.equal('COMMENT');
+    });
 
-  it('should recognize comment tokens', function() {
-    var cmmnt = '// hey this is a comment'
-      , tokens = lexer.tokenize(cmmnt);
-    expect(tokens.length).to.equal(1);
-    expect(tokens[0][0]).to.equal('COMMENT');
-    expect(tokens[0][1]).to.equal(cmmnt);
-  });
+    it('should recognize new line tokens', function() {
+      lexer.chunk = '\n\n\n';
+      expect(lexer.lineToken()).to.equal(1);
+      expect(lexer.tokens[0][0]).to.equal('NEW_LINE');
+    });
 
-  it('should recognize new line tokens', function() {
-    var nls = '\n\n\n'
-      , tokens = lexer.tokenize(nls);
-    expect(tokens.length).to.equal(3); // Should find all three
-    expect(tokens[0][0]).to.equal('NEW_LINE');
-    expect(tokens[0][1]).to.equal('\n'); // Each should only be a sinle \n
-  });
+    it('should recognize non-newline white space tokens', function() {
+      lexer.chunk = '\t\t\n';
+      expect(lexer.whitespaceToken()).to.equal(2);
+      expect(lexer.tokens[0][0]).to.equal('WHITESPACE');
+    });
 
-  it('should recognize white space tokens', function() {
-    var ws = ' \t'
-      , tokens = lexer.tokenize(ws);
-    expect(tokens.length).to.equal(1);
-    expect(tokens[0][0]).to.equal('WHITESPACE');
-    expect(tokens[0][1]).to.equal(ws);
-  });
+    it('should recognize number tokens', function() {
+      lexer.chunk = '462';
+      expect(lexer.numberToken()).to.equal(3);
+      expect(lexer.tokens[0][0]).to.equal('NUMBER');
+    });
 
-  it('should recognize number tokens', function() {
-    var nmbr = '462'
-      , tokens = lexer.tokenize(nmbr);
-    expect(tokens.length).to.equal(1);
-    expect(tokens[0][0]).to.equal('NUMBER');
-    expect(tokens[0][1]).to.equal(nmbr);
-  });
+    it('should recognize string tokens', function() {
+      lexer.chunk = '"Hey this is a simple string"';
+      expect(lexer.stringToken())
+          .to.equal('"Hey this is a simple string"'.length);
+      expect(lexer.tokens[0][0]).to.equal('STRING');
+    });
 
-  it('should recognize string tokens', function() {
-    var str = '"Hey this is a simple string"'
-      , tokens = lexer.tokenize(str);
-    expect(tokens.length).to.equal(1);
-    expect(tokens[0][0]).to.equal('STRING');
-    expect(tokens[0][1]).to.equal(str);
   });
 
 });
