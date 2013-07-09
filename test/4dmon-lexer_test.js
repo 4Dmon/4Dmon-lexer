@@ -64,8 +64,16 @@ describe('4dmon-lexer', function() {
         expect(lexer.tokens[0][0]).to.equal('IDENTIFIER_INVOKED');
       });
 
-      it('should recognize built in 4D methods', function() {
-        // [todo /]
+      it('should recognize built in 4D Commands', function() {
+        lexer.chunk = 'Abs';
+        expect(lexer.reservedToken()).to.equal(3);
+        expect(lexer.tokens[0][0]).to.equal('FOURD_COMMAND');
+      });
+
+      it('should case format built in 4D Commands', function() {
+        lexer.chunk = 'aBoRt';
+        lexer.reservedToken();
+        expect(lexer.tokens[0][1]).to.equal('ABORT');
       });
 
       it('should recognize project methods', function() {
