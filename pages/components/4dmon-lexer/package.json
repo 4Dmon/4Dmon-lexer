@@ -1,0 +1,40 @@
+{
+  "name": "4dmon-lexer",
+  "description": "Lexer for 4D code",
+  "version": "0.1.0",
+  "homepage": "http://jtrussell-ivantage.github.io/4dmon-lexer",
+  "author": {
+    "name": "Justin Russell",
+    "email": "jrussell@ivantagehealth.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jrussell-ivantage/4dmon-lexer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jrussell-ivantage/4dmon-lexer/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://jtrussell-ivantage.github.io/4dmon-lexer/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/4dmon-lexer",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt": "~0.4.0rc7",
+    "chai": "~1.6.0",
+    "grunt-simple-mocha": "~0.4.0",
+    "matchdep": "~0.1.2",
+    "mocha": "~1.9.0"
+  },
+  "keywords": []
+}

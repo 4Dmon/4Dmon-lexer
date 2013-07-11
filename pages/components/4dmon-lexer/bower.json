@@ -1,0 +1,9 @@
+{
+  "name": "4dmon-lexer",
+  "version": "0.0.0",
+  "commit": "f01d5c8f3ab80bf7c41f4d676069eeec129023f0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jrussell-ivantage/4dmon-lexer.git"
+  }
+}

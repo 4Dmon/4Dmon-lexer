@@ -1,3 +1,26 @@
-<div>
-  Usage!
+<div class="row-fluid">
+  <h3>Usage Example</h3>
+  <pre class="span8">
+<span class="muted">/*
+* First you need a bunch of 4D code, it should include newlines and everything.
+* Don't worry about capitalization or extra white space (the 4D compiler doesn't
+* and neither do we).
+*/</span>
+var fourdCode = 'if(True)\n' + <i>more stuff</i> + '\nendif';
+
+<span class="muted">/*
+* You'll need an instance of the lexer too, naturally.
+*/</span>
+var lexer = new Lexer();
+
+<span class="muted">/*
+* That's it (for basic usage...), let the lexer work its magic.
+*/</span>
+var tokens = lexer.tokenize(fourdCode);
+
+<span class="muted">/*
+* Profit!
+*/</span>
+profit(tokens);
+  </pre>
 </div>
