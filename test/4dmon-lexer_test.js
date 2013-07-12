@@ -1,13 +1,15 @@
 /*global describe, it, beforeEach */
-/*jshint unused:false */
 
 'use strict';
+
+// -----------------------------------------------------
+// Unit tests
+// -----------------------------------------------------
 
 var fs = require('fs')
   , expect = require('chai').expect
   , Lexer = require('../lib/4dmon-lexer.js').Lexer
   , fixtures = __dirname + '/fixtures'
-  , fx_comments = fs.readFileSync(fixtures + '/comments.txt').toString()
   , fx_trailing_whitespace = fs
       .readFileSync(fixtures + '/trailing_whitespace.txt').toString();
 
@@ -131,6 +133,9 @@ describe('4dmon-lexer', function() {
         // Arithmatic Operators
         '+', '-', '*', '/',
 
+        // Assignment
+        ':=',
+
         // Comparison Operators
         '<=', '>=', '<', '>', '=', '#'
       ];
@@ -140,11 +145,17 @@ describe('4dmon-lexer', function() {
           lexer.chunk = op;
           expect(lexer.operatorToken()).to.equal(op.length);
           var tok = lexer.tokens.pop();
-          expect(tok[0]).to.equal('OPERATOR');
+          expect(tok[0]).to.match(/^OPERATOR_/);
           expect(tok[1]).to.equal(op);
         });
       });
 
+    });
+
+    it('should recognize seperators', function() {
+      lexer.chunk = ';';
+      expect(lexer.separatorToken()).to.equal(1);
+      expect(lexer.tokens[0][0]).to.equal('SEPARATOR');
     });
 
   });
