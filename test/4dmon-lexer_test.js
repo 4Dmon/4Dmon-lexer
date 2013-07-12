@@ -123,6 +123,46 @@ describe('4dmon-lexer', function() {
       expect(lexer.tokens[0][0]).to.equal('STRING');
     });
 
+    it('should recognize operator tokens', function() {
+      var logicOperators = ['&', '|']
+        , arithmaticOperators = ['+', '-', '*', '/']
+        , comparisonOperators = ['<=', '>=', '<', '>', '=', '#']
+        , i, token;
+
+      lexer.chunk =
+          logicOperators.join('') +
+          arithmaticOperators.join('') +
+          comparisonOperators.join('');
+
+      for(i = 0; i < logicOperators.length; i++) {
+        expect(lexer.operatorToken())
+            .to.equal(logicOperators[i].length);
+        token = lexer.tokens.pop();
+        expect(token[0]).to.equal('OPERATOR');
+        expect(token[1]).to.equal(logicOperators[i]);
+        lexer.chunk = lexer.chunk.substring(token[1].length);
+      }
+
+      for(i = 0; i < arithmaticOperators.length; i++) {
+        expect(lexer.operatorToken())
+            .to.equal(arithmaticOperators[i].length);
+        token = lexer.tokens.pop();
+        expect(token[0]).to.equal('OPERATOR');
+        expect(token[1]).to.equal(arithmaticOperators[i]);
+        lexer.chunk = lexer.chunk.substring(token[1].length);
+      }
+
+      for(i = 0; i < comparisonOperators.length; i++) {
+        expect(lexer.operatorToken())
+            .to.equal(comparisonOperators[i].length);
+        token = lexer.tokens.pop();
+        expect(token[0]).to.equal('OPERATOR');
+        expect(token[1]).to.equal(comparisonOperators[i]);
+        lexer.chunk = lexer.chunk.substring(token[1].length);
+      }
+
+    });
+
   });
 
 });
