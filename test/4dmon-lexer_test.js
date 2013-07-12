@@ -125,9 +125,14 @@ describe('4dmon-lexer', function() {
 
     describe('operator tokens recognition', function() {
       var ops = [
-        '&', '|', // Logic Operators
-        '+', '-', '*', '/', // Arithmatic Operators
-        '<=', '>=', '<', '>', '=', '#' // Comparison Operators
+        // Logic Operators
+        '&', '|',
+
+        // Arithmatic Operators
+        '+', '-', '*', '/',
+
+        // Comparison Operators
+        '<=', '>=', '<', '>', '=', '#'
       ];
 
       ops.forEach(function(op) {
