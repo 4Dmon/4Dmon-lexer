@@ -24,7 +24,7 @@
     exports = module.exports;
   } else if(typeof window !== 'undefined') {
     exports = window.fourdmon = window.fourdmon || {};
-  } 
+  }
 
   exports.Lexer = function() {
 
@@ -42,6 +42,8 @@
       , NUMBER
       , TRAILING_WHITESPACE
       , WHITESPACE
+      , ASSIGNMENT
+      , SEPARATOR
 
       // Token Groups
       , FOURD_COMMANDS // TAG: FOURD_COMMAND
@@ -49,7 +51,7 @@
       , FOURD_KEYWORDS // TAG: FOURD_KEYWORD
       , COMPARE
       , LOGIC
-      , MATH
+      , ARITHMATIC
 
       // Convenience Hash Objects
       // lowercase keyword --> proper capitalization keyword
@@ -71,10 +73,12 @@
 
       while(this.chunk) {
         // NOTE: the order below defines precedence
-        i += this.commentToken()
+        i = this.commentToken()
             || this.lineToken()
             || this.whitespaceToken()
             || this.numberToken()
+            || this.separatorToken()
+            || this.operatorToken()
             || this.stringToken()
             || this.reservedToken()
             || this.identifierToken();
@@ -82,7 +86,7 @@
         // [todo] Better error handling. For now just don't loop forever [/todo]
         if(isNaN(i)) { throw 'Could not parse: ' + this.chunk; }
 
-        this.chunk = code.slice(i); // [todo] benchmark against substring? [/todo]
+        this.chunk = this.chunk.slice(i); // [todo] benchmark against substring? [/todo]
       }
 
       return this.tokens;
@@ -154,6 +158,21 @@
     this.numberToken = function() {
       // [todo] Does 4D do e.g. hex literals? I don't even know. [/todo]
       return this.basicToken(NUMBER, 'NUMBER');
+    };
+
+    this.separatorToken = function() {
+      return this.basicToken(SEPARATOR, 'SEPARATOR');
+    };
+
+    this.operatorToken = function() {
+      var value = this.basicToken(LOGIC, 'OPERATOR_LOGIC');
+      if(value) { return value; }
+      value = this.basicToken(ARITHMATIC, 'OPERATOR_ARITHATIC');
+      if(value) { return value; }
+      value = this.basicToken(ASSIGNMENT, 'OPERATOR_ASSIGNMENT');
+      if(value) { return value; }
+      value = this.basicToken(COMPARE, 'OPERATOR_COMPARE');
+      return value;
     };
 
     this.stringToken = function() {
@@ -249,6 +268,16 @@
 
     WHITESPACE = /^[^\n\S]+/;
 
+    ASSIGNMENT = /^:=/;
+
+    SEPARATOR = /^[;()]/;
+
+    LOGIC = /^[&|]/;
+
+    ARITHMATIC = /^[+\-*\/]/;
+
+    COMPARE = /^(?:<=?|>=?|=|#)/;
+
 
     // -----------------------------------------------------
     // Token literals and groups of token literals
@@ -258,15 +287,9 @@
     // -----------------------------------------------------
 
     // [implement] FILL THESE IN [/implement]
-    FOURD_COMMANDS = ['ABORT', 'Abs', 'ACCEPT'];
+    FOURD_COMMANDS = ['ABORT', 'Abs', 'ACCEPT', 'If', 'Endif'];
     FOURD_CONSTANTS = [];
     FOURD_KEYWORDS = [];
-
-    LOGIC = ['&', '|'];
-
-    MATH = ['+', '-', '*', '/'];
-
-    COMPARE = ['>', '<', '<=', '>=', '='];
 
     // Convenience lookup objects, it'll be faster to use
     // `Object.hasOwnProperty` than `Array.indexOf`. These are also normalized

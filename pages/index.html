@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="styles/374ba5b3.main.css">
+    <link rel="stylesheet" href="styles/7242b400.main.css">
   </head>
   <body ng-app="4dmonLexerApp">
     <!--[if lt IE 7]>
@@ -27,10 +27,10 @@
         <div class="navbar-inner">
           <a class="brand" href="#">4dmon Lexer</a>
           <ul class="nav">
-            <li class="active"><a href="#">About</a></li>
-            <li><a href="#">Demo</a></li>
-            <li><a href="#">Usage</a></li>
-            <li><a href="#">Contributing</a></li>
+            <li ng-class="{'active': loc == ''}"><a ng-click="loc=''" scroll-to="">About</a></li>
+            <li ng-class="{'active': loc == 'd'}"><a ng-click="loc='d'" scroll-to="demo">Demo</a></li>
+            <li ng-class="{'active': loc == 'u'}"><a ng-click="loc='u'" scroll-to="usage">Usage</a></li>
+            <li ng-class="{'active': loc == 'c'}"><a ng-click="loc='c'" scroll-to="contributing">Contributing</a></li>
           </ul>
         </div>
       </div>
@@ -47,10 +47,12 @@
         </div>
       </div>
     </div>
+
     <script src="components/angular/angular.js"></script>
+    <script src="components/ngScrollTo/ng-scrollto.js"></script>
     <script src="components/4dmon-lexer/lib/4dmon-lexer.js"></script>
 
-    <script src="scripts/61611d94.scripts.js"></script>
+    <script src="scripts/08556a6d.scripts.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

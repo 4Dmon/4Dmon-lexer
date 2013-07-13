@@ -1,13 +1,15 @@
 /*global describe, it, beforeEach */
-/*jshint unused:false */
 
 'use strict';
+
+// -----------------------------------------------------
+// Unit tests
+// -----------------------------------------------------
 
 var fs = require('fs')
   , expect = require('chai').expect
   , Lexer = require('../lib/4dmon-lexer.js').Lexer
   , fixtures = __dirname + '/fixtures'
-  , fx_comments = fs.readFileSync(fixtures + '/comments.txt').toString()
   , fx_trailing_whitespace = fs
       .readFileSync(fixtures + '/trailing_whitespace.txt').toString();
 
@@ -121,6 +123,39 @@ describe('4dmon-lexer', function() {
       expect(lexer.stringToken())
           .to.equal('"Hey this is a simple string"'.length);
       expect(lexer.tokens[0][0]).to.equal('STRING');
+    });
+
+    describe('operator tokens recognition', function() {
+      var ops = [
+        // Logic Operators
+        '&', '|',
+
+        // Arithmatic Operators
+        '+', '-', '*', '/',
+
+        // Assignment
+        ':=',
+
+        // Comparison Operators
+        '<=', '>=', '<', '>', '=', '#'
+      ];
+
+      ops.forEach(function(op) {
+        it('should recognize operator ' + op, function() {
+          lexer.chunk = op;
+          expect(lexer.operatorToken()).to.equal(op.length);
+          var tok = lexer.tokens.pop();
+          expect(tok[0]).to.match(/^OPERATOR_/);
+          expect(tok[1]).to.equal(op);
+        });
+      });
+
+    });
+
+    it('should recognize seperators', function() {
+      lexer.chunk = ';';
+      expect(lexer.separatorToken()).to.equal(1);
+      expect(lexer.tokens[0][0]).to.equal('SEPARATOR');
     });
 
   });

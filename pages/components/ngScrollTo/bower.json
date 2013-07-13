@@ -1,0 +1,9 @@
+{
+  "name": "ngScrollTo",
+  "version": "0.0.0",
+  "commit": "8b4b268e3ec06bede9e88b3289f363a1f037c960",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iameugenejo/ngScrollTo.git"
+  }
+}

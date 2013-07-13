@@ -1,6 +1,6 @@
-<div class="row-fluid">
+<section class="row-fluid">
   <h3>Usage Example</h3>
-  <pre class="span8">
+  <pre class="span10">
 <span class="muted">/*
 * First you need a bunch of 4D code, it should include newlines and everything.
 * Don't worry about capitalization or extra white space (the 4D compiler doesn't
@@ -11,7 +11,9 @@ var fourdCode = 'if(True)\n' + <i>more stuff</i> + '\nendif';
 <span class="muted">/*
 * You'll need an instance of the lexer too, naturally.
 */</span>
-var lexer = new Lexer();
+var lexer = new fourdmon.Lexer();
+<span class="muted">// or nodejs world...
+// var lexer = new require('fourdmon_lexer').Lexer();</span>
 
 <span class="muted">/*
 * That's it (for basic usage...), let the lexer work its magic.
@@ -23,4 +25,4 @@ var tokens = lexer.tokenize(fourdCode);
 */</span>
 profit(tokens);
   </pre>
-</div>
+</section>

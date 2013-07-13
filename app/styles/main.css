@@ -13,6 +13,10 @@
   margin-left: 0 !important;
 }
 
+#nav-wrapper > .navbar a {
+  cursor: pointer;
+}
+
 body {
   padding-top: 80px;
 }
@@ -26,7 +30,11 @@ body {
   text-align: left;
 }
 
-.zebra-wells div:nth-child(odd) .well {
+.zebra-wells > div:nth-child(odd) .well {
   background-color: #fff !important;
   border-color: #eee !important;
+}
+
+.zebra-wells > div {
+  padding-top: 80px;
 }

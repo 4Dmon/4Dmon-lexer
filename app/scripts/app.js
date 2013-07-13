@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('4dmonLexerApp', [])
+angular.module('4dmonLexerApp', ['ngScrollTo'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

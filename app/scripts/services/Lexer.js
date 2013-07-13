@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('4dmonLexerApp')
-  .factory('fdLexer', function() {
+  .factory('fourdLexer', function() {
     return new window.fourdmon.Lexer();
   });
 

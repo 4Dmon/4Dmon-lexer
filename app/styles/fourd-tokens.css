@@ -1,0 +1,80 @@
+.fourd-code {
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+.fourd-code .tok.fourd-comment {
+  color: #999988;
+  font-style: italic;
+}
+
+/*
+.fourd-code .tok.fourd-double_quote_string {
+  color: ;
+}
+
+.fourd-code .tok.fourd-identifier {
+  color: ;
+}
+
+.fourd-code .tok.fourd-identifier_global {
+  color: ;
+}
+*/
+
+.fourd-code .tok.fourd-identifier_local {
+  color: #00009B;
+  font-weight: bold;
+}
+
+/*
+.fourd-code .tok.fourd-identifier_invoked {
+  color: ;
+}
+
+.fourd-code .tok.fourd-new_line {
+  color: ;
+}
+
+.fourd-code .tok.fourd-number {
+  color: ;
+}
+
+.fourd-code .tok.fourd-whitespace {
+  color: ;
+}
+
+.fourd-code .tok.fourd-operator_assignment {
+  color: ;
+}
+
+.fourd-code .tok.fourd-operator_compare {
+  color: ;
+}
+
+.fourd-code .tok.fourd-operator_logic {
+  color: ;
+}
+
+.fourd-code .tok.fourd-operator_arithmatic {
+  color: ;
+}
+
+.fourd-code .tok.fourd-separator {
+  color: ;
+}
+*/
+
+.fourd-code .tok.fourd-fourd_command {
+  color: #3F803F;
+  font-weight: bold;
+}
+
+/*
+.fourd-code .tok.fourd-fourd_constants {
+  color: ;
+}
+
+.fourd-code .tok.fourd-fourd_keywords {
+  color: ;
+}
+*/
