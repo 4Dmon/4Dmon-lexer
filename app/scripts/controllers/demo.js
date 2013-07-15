@@ -8,7 +8,7 @@ angular.module('4dmonLexerApp')
       '// Go ahead and write some 4D code goodness',
       'if($falsy)',
       '    alert("I am the uncle of a monkey")',
-      'endif'
+      'end if'
     ].join('\n');
   });
 
