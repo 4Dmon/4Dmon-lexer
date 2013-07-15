@@ -5730,6 +5730,7 @@ body {
 }
 */
 
+.fourd-code .tok.fourd-fourd_keyword,
 .fourd-code .tok.fourd-fourd_command {
   color: #3F803F;
   font-weight: bold;
@@ -5737,10 +5738,6 @@ body {
 
 /*
 .fourd-code .tok.fourd-fourd_constants {
-  color: ;
-}
-
-.fourd-code .tok.fourd-fourd_keywords {
   color: ;
 }
 */
