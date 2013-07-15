@@ -5669,8 +5669,7 @@ body {
 }
 
 .fourd-code .tok.fourd-comment {
-  color: #999988;
-  font-style: italic;
+  color: #535353;
 }
 
 /*
@@ -5688,15 +5687,16 @@ body {
 */
 
 .fourd-code .tok.fourd-identifier_local {
-  color: #00009B;
+  color: #0031FF;
+}
+
+.fourd-code .tok.fourd-identifier_invoked {
+  color: #25006C;
+  font-style: italic;
   font-weight: bold;
 }
 
 /*
-.fourd-code .tok.fourd-identifier_invoked {
-  color: ;
-}
-
 .fourd-code .tok.fourd-new_line {
   color: ;
 }
@@ -5730,14 +5730,17 @@ body {
 }
 */
 
-.fourd-code .tok.fourd-fourd_keyword,
 .fourd-code .tok.fourd-fourd_command {
-  color: #3F803F;
+  color: #068C00;
   font-weight: bold;
 }
 
-/*
-.fourd-code .tok.fourd-fourd_constants {
-  color: ;
+.fourd-code .tok.fourd-fourd_keyword {
+  color: #034D00;
+  font-weight: bold;
 }
-*/
+
+.fourd-code .tok.fourd-fourd_constant {
+  color: #4D004D;
+  text-decoration: underline;
+}
