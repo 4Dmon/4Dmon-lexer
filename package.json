@@ -2,22 +2,22 @@
   "name": "4dmon-lexer",
   "description": "Lexer for 4D code",
   "version": "0.1.0",
-  "homepage": "http://jtrussell-ivantage.github.io/4dmon-lexer",
+  "homepage": "http://4dmon.github.io/4dmon-lexer",
   "author": {
     "name": "Justin Russell",
     "email": "jrussell@ivantagehealth.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jrussell-ivantage/4dmon-lexer.git"
+    "url": "git://github.com/4dmon/4dmon-lexer.git"
   },
   "bugs": {
-    "url": "https://github.com/jrussell-ivantage/4dmon-lexer/issues"
+    "url": "https://github.com/4dmon/4dmon-lexer/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://jtrussell-ivantage.github.io/4dmon-lexer/blob/master/LICENSE-MIT"
+      "url": "http://4dmon.github.io/4dmon-lexer/blob/master/LICENSE-MIT"
     }
   ],
   "main": "lib/4dmon-lexer",
